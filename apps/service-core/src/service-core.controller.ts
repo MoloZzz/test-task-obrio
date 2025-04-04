@@ -3,10 +3,10 @@ import { ServiceCoreService } from './service-core.service';
 
 @Controller()
 export class ServiceCoreController {
-  constructor(private readonly serviceCoreService: ServiceCoreService) {}
+    constructor(private readonly serviceCoreService: ServiceCoreService) {}
 
-  @Get()
-  getHello(): string {
-    return this.serviceCoreService.getHello();
-  }
+    @Get()
+    getHello(): string {
+        return this.serviceCoreService.getHello();
+    }
 }
