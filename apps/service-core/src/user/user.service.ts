@@ -12,6 +12,9 @@ export class UserService {
     ) {}
 
     async createUser(data: CreateUserDto): Promise<UserEntity> {
-        return this.userRepository.save(data);
+        const userEntityObject = this.userRepository.create(data); // Краще не створювати відразу з dto
+        const createdUser = await this.userRepository.save(userEntityObject); // А чітко розділяти, щоб бд працювала тільки з ентіті
+        // TODO: Передаємо інфу в service-notification щоб сповістити юзера через 24 години
+        return createdUser;
     }
 }

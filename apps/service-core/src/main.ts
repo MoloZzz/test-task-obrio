@@ -4,10 +4,20 @@ import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { RmqService } from '@app/common';
 import { MicroserviceOptions } from '@nestjs/microservices';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
     const app = await NestFactory.create(ServiceCoreModule);
     const configService = app.get(ConfigService);
+    app.useGlobalPipes(
+        new ValidationPipe({
+            whitelist: true, // then validator will strip validated object of any properties that do not have any decorators (ValidatorOptions)
+            transform: true, // allow automatic transformation of incoming data (ValidationPipeOptions)
+            transformOptions: {
+                enableImplicitConversion: true, // enable transformation of data types (ClassTransformOptions)
+            },
+        }),
+    );
     if (configService.get<string>('NODE_ENV') !== 'production') {
         const config = new DocumentBuilder()
             .setTitle('SERVICE-CORE API documentation')
