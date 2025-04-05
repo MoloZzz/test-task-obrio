@@ -3,6 +3,7 @@ import { ServiceCoreController } from './service-core.controller';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RmqModule } from '@app/common';
 
 @Module({
     imports: [
@@ -25,6 +26,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
                 ...(configService.get<string>('NODE_ENV') === 'development' ? {} : { ssl: { rejectUnauthorized: false } }),
             }),
             inject: [ConfigService],
+        }),
+        RmqModule,
+        RmqModule.register({
+            name: 'NOTIFICATION_CLIENT',
+            queueName: 'RABBIT_MQ_NOTIFICATION_QUEUE',
         }),
     ],
     controllers: [ServiceCoreController],
