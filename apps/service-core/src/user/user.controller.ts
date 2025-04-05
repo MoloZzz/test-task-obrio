@@ -9,8 +9,8 @@ export class UserController {
     constructor(private readonly serviceUser: UserService) {}
 
     @Post('')
-    @ApiOperation({ summary: 'Create user' })
+    @ApiOperation({ summary: 'Створити юзера' })
     async createUser(@Body() data: CreateUserDto): Promise<UserEntity> {
-        return await this.serviceUser.createUser(data);
+        return this.serviceUser.createUser(data);
     }
 }
