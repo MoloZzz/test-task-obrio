@@ -11,7 +11,7 @@ async function bootstrap() {
     if (configService.get<string>('NODE_ENV') !== 'production') {
         const config = new DocumentBuilder()
             .setTitle('SERVICE-CORE API documentation')
-            .setDescription('Development API documentation for nashdim service-core microservice')
+            .setDescription('Development API documentation for obrio task service-core microservice')
             .setVersion('1.0')
             .addBearerAuth()
             .build();
