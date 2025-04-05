@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('users')
 export class UserEntity {
@@ -7,4 +7,24 @@ export class UserEntity {
 
     @Column({ type: 'varchar', nullable: false })
     name: string;
+
+    @CreateDateColumn({
+        type: 'timestamptz',
+        default: () => 'CURRENT_TIMESTAMP',
+        comment: 'Дата створення',
+    })
+    createdAt: Date;
+
+    @UpdateDateColumn({
+        type: 'timestamptz',
+        comment: 'Дата останнього оновлення',
+    })
+    updatedAt: Date;
+
+    @Column({
+        type: 'boolean',
+        default: false,
+        comment: 'Чи був надісланий push користувачу',
+    })
+    isPushed: boolean;
 }
