@@ -4,10 +4,10 @@ import { CreateUserDto } from '../common/dto/create-user.sto';
 
 @Controller('user')
 export class UserController {
-    constructor(private readonly serviceUser: UserService){}
+    constructor(private readonly serviceUser: UserService) {}
 
-    @Post("")
-    async createUser(@Body() data: CreateUserDto){
+    @Post('')
+    async createUser(@Body() data: CreateUserDto) {
         return await this.serviceUser.createUser(data);
     }
 }

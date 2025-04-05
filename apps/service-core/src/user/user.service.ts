@@ -5,6 +5,6 @@ import { CreateUserDto } from '../common/dto/create-user.sto';
 @Injectable()
 export class UserService {
     async createUser(data: CreateUserDto) {
-        console.log("User have not created, no database yet");
+        console.log('User have not created, no database yet');
     }
 }
