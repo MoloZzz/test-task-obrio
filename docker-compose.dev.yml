@@ -17,8 +17,7 @@ services:
     networks:
       obrio-task:
     command: npx nest start --watch service-core
-
-    service-integration:
+   service-integration:
       container_name: service-integration
       restart: unless-stopped
       env_file:
@@ -33,8 +32,7 @@ services:
       networks:
         obrio-task:
       command: npx nest start --watch service-integration
-
-    service-notification:
+   service-notification:
       container_name: service-notification
       restart: unless-stopped
       env_file:

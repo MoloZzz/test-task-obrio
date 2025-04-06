@@ -81,11 +81,11 @@ $ yarn start:dev [service name]
 
 ## env файли
 # service-core: 
-DATABASE_HOST=postgres
-DATABASE_PORT=5432
-DATABASE_USER=postgres
-DATABASE_PASSWORD=
-DATABASE_NAME=
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=
+POSTGRES_DB_NAME=
 NODE_ENV=development
 PORT=9001
 RABBIT_MQ_URI=amqp://guest:guest@rabbitmq:5672 

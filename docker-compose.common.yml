@@ -21,12 +21,12 @@ services:
     ports:
       - 15672:15672
       - 5672:5672
-    hostname: rabbitmq-obrio
+    hostname: rabbitmq
     networks:
       obrio-task:
   redis:
     image: redis:alpine
-    container_name: redis-obrio
+    container_name: redis
     restart: always
     ports:
       - 6379:6379
