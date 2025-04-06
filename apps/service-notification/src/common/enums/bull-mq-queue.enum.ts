@@ -1,0 +1,3 @@
+export enum BullMqQueue {
+    BULL_MQ_NOTIFY_USER_QUEUE = 'BULL_MQ_NOTIFY_USER_QUEUE'
+}
