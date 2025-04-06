@@ -1,6 +1,54 @@
 version: '3.7'
 services:
-  service-core:
+   service-core:
+    container_name: service-core
+    restart: unless-stopped
+    env_file:
+      - ./apps/service-core/.env
+    build:
+      context: .
+      dockerfile: ./apps/service-core/Dockerfile
+      target: dev
+    ports:
+      - 9000:9000
+    volumes:
+      - ./apps/service-core:/usr/src/app/apps/service-core
+      - ./libs:/usr/src/app/libs
+    networks:
+      obrio-task:
+    command: npx nest start --watch service-core
+
+    service-integration:
+      container_name: service-integration
+      restart: unless-stopped
+      env_file:
+        - ./apps/service-integration/.env
+      build:
+        context: .
+        dockerfile: ./apps/service-integration/Dockerfile
+        target: dev
+      volumes:
+        - ./apps/service-integration:/usr/src/app/apps/service-integration
+        - ./libs:/usr/src/app/libs
+      networks:
+        obrio-task:
+      command: npx nest start --watch service-integration
+
+    service-notification:
+      container_name: service-notification
+      restart: unless-stopped
+      env_file:
+        - ./apps/service-notification/.env
+      build:
+        context: .
+        dockerfile: ./apps/service-notification/Dockerfile
+        target: dev
+      volumes:
+        - ./apps/service-notification:/usr/src/app/apps/service-notification
+        - ./libs:/usr/src/app/libs
+      networks:
+        obrio-task:
+      command: npx nest start --watch service-notification
 
 networks:
   obrio-task:
