@@ -13,7 +13,6 @@ export class NotificationQueueService {
     async schedulePush(jobName: string, userName: string, delayMs: number = 0) {
         const job = await this.queue.add(jobName, { name: userName }, { delay: delayMs, attempts: 3 });
         console.log(`Job ${job.id} scheduled for user '${userName}' in ${delayMs}ms`);
-        await this.checkQueue()
     }
 
     async checkQueue() {
