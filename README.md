@@ -12,6 +12,7 @@
 Кожен сервіс є окремим NestJS-додатком, ізольованим і масштабованим.
 
 ---
+
 ## 🔧 Мікросервіси
 
 ### 1. `service-core`
@@ -43,3 +44,24 @@
 - **Webhook.site** — тестування "надсилання push"
 
 ---
+
+## Start working
+### Running common containers
+*turn on docker desktop 
+```bash
+# This command starts containers with Postgres, RabbitMQ, and Redis
+$ docker compose -f docker-compose.common.yml up -d
+```
+
+### Running apps
+```bash
+# Development build with watch mode
+$ docker compose -f docker-compose.dev.yml up --build
+
+# Production build
+$ docker compose up --build
+
+# Run service without docker
+## This may require changes to the .env files
+$ yarn start:dev [service name]
+```

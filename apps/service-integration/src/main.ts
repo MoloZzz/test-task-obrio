@@ -11,7 +11,7 @@ async function bootstrap() {
 
     const app = await NestFactory.createMicroservice<MicroserviceOptions>(
         ServiceIntegrationModule,
-        rmq.getOptions(configService.get<string>('RABBIT_MQ_NOTIFICATION_QUEUE')),
+        rmq.getOptions(configService.get<string>('RABBIT_MQ_INTEGRATION_QUEUE')),
     );
 
     await app.listen(); //Не має власного порту, звертаємось лише через чергу rmq

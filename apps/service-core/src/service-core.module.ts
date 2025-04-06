@@ -28,10 +28,6 @@ import { RmqModule } from '@app/common';
             inject: [ConfigService],
         }),
         RmqModule,
-        RmqModule.register({
-            name: 'NOTIFICATION_CLIENT',
-            queueName: 'RABBIT_MQ_NOTIFICATION_QUEUE',
-        }),
     ],
     controllers: [ServiceCoreController],
     providers: [],
