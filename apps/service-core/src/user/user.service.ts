@@ -31,7 +31,8 @@ export class UserService {
             name: createdUser.name,
             timeToPush: addDays(createdUser.createdAt, 1).toISOString(),
         };
-        //await lastValueFrom(this.clientNotification.send({ cmd: 'push-user-by-name' }, dataToPushUser));
+        
+        this.clientNotification.emit<IPushUserByName>({ cmd: 'push-user-by-name' }, dataToPushUser);
         return createdUser;
     }
 }
