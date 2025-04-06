@@ -24,7 +24,7 @@
 ### 2. `service-notification`
 
 - Слухає події про нових користувачів.
-- Через 24 години (імітація через cron або Redis) надсилає push-сповіщення.
+- Через 24 години (імітація через cron або Redis, наразі BullMQ поверх redis) надсилає push-сповіщення.
 - Публікує подію для `service-integration`.
 
 ### 3. `service-integration`
@@ -65,3 +65,16 @@ $ docker compose up --build
 ## This may require changes to the .env files
 $ yarn start:dev [service name]
 ```
+
+## Як зараз усе працює разом:
+- service-core публікує подію RabbitMQ: { cmd: 'push-user-by-name' }.
+- user-created.listener.ts слухає цю подію через @MessagePattern(...).
+- listener викликає метод schedulePush(...) із NotificationService.
+- NotificationService додає задачу до BullMQ черги push-user, з затримкою 24 години.
+- Через 24 години NotificationProcessor слухає цю задачу й виконує (наприклад, надсилає запит до service-integration або пушить напряму).
+
+## service-notification модульна структура:
+- **notification**	Бізнес-логіка планування та виконання
+- **notification-queue**	Підключення BullMQ + Redis, тобто внутрішня черга/будильник
+- **events** Слухання подій RMQ із зовнішніх сервісів
+- **rmq** (використовуємо спільний модуль з libs) Реєстрація RabbitMQ

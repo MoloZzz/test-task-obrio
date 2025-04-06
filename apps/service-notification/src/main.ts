@@ -5,15 +5,12 @@ import { RmqService } from '@app/common';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
-    const configApp = await NestFactory.create(ServiceNotificationModule);
-    const configService = configApp.get(ConfigService);
-    const rmq = configApp.get<RmqService>(RmqService);
-
-    const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-        ServiceNotificationModule,
-        rmq.getOptions(configService.get<string>('RABBIT_MQ_NOTIFICATION_QUEUE')),
+    const app = await NestFactory.create(ServiceNotificationModule);
+    const configService = app.get<ConfigService>(ConfigService);
+    const rmqService = app.get<RmqService>(RmqService);
+    app.connectMicroservice<MicroserviceOptions>(
+        rmqService.getOptions(configService.get<string>('RABBIT_MQ_NOTIFICATION_QUEUE')),
     );
-
-    await app.listen(); //Не має власного порту, звертаємось лише через чергу rmq
+    await app.startAllMicroservices(); //Не має власного порту, звертаємось лише через чергу rmq
 }
 bootstrap();
