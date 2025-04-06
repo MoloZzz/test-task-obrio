@@ -4,6 +4,7 @@ import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RmqModule } from '@app/common';
+import * as Joi from 'joi';
 
 @Module({
     imports: [
@@ -11,6 +12,18 @@ import { RmqModule } from '@app/common';
         ConfigModule.forRoot({
             isGlobal: true,
             envFilePath: [`apps/service-core/.env`],
+            validationSchema: Joi.object({
+                DATABASE_HOST: Joi.string().required(),
+                DATABASE_PORT: Joi.number().port().required(),
+                DATABASE_USER: Joi.string().required(),
+                DATABASE_PASSWORD: Joi.string().required(),
+                DATABASE_NAME: Joi.string().required(),
+                NODE_ENV: Joi.string().valid('development', 'production', 'test').required(),        
+                PORT: Joi.number().port().required(),
+                RABBIT_MQ_URI: Joi.string().required(),
+                RABBIT_MQ_NOTIFICATION_QUEUE: Joi.string().required(),
+                RABBIT_MQ_CORE_QUEUE: Joi.string().required(),
+              }),
         }),
         TypeOrmModule.forRootAsync({
             imports: [ConfigModule],

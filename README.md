@@ -78,3 +78,28 @@ $ yarn start:dev [service name]
 - **notification-queue**	Підключення BullMQ + Redis, тобто внутрішня черга/будильник
 - **events** Слухання подій RMQ із зовнішніх сервісів
 - **rmq** (використовуємо спільний модуль з libs) Реєстрація RabbitMQ
+
+## env файли
+# service-core: 
+DATABASE_HOST=postgres
+DATABASE_PORT=5432
+DATABASE_USER=postgres
+DATABASE_PASSWORD=
+DATABASE_NAME=
+NODE_ENV=development
+PORT=9001
+RABBIT_MQ_URI=amqp://guest:guest@rabbitmq:5672 
+RABBIT_MQ_NOTIFICATION_QUEUE=RABBIT_MQ_NOTIFICATION_QUEUE
+RABBIT_MQ_CORE_QUEUE=RABBIT_MQ_CORE_QUEUE
+
+# service-integration:
+RABBIT_MQ_URI=amqp://guest:guest@rabbitmq:5672
+RABBIT_MQ_INTEGRATION_QUEUE=RABBIT_MQ_INTEGRATION_QUEUE
+RABBIT_MQ_NOTIFICATION_QUEUE=RABBIT_MQ_NOTIFICATION_QUEUE
+WEBHOOK_BASE_URL=https://webhook.site
+
+# service-notification:
+RABBIT_MQ_URI=amqp://guest:guest@rabbitmq5672
+RABBIT_MQ_NOTIFICATION_QUEUE=RABBIT_MQ_NOTIFICATION_QUEUE
+REDIS_HOST=redis
+REDIS_PORT=6379
