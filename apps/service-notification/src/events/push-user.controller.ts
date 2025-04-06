@@ -6,9 +6,7 @@ import { IPushUserByName } from '@app/common';
 /** Слухаємо події з RMQ (інші сервіси) */
 @Controller('push-user')
 export class PushUserController {
-    constructor(
-        @Inject(NotificationService) private readonly notificationService: NotificationService
-    ) {}
+    constructor(@Inject(NotificationService) private readonly notificationService: NotificationService) {}
 
     @MessagePattern({ cmd: 'push-user-by-name' })
     async handleUserCreated(data: IPushUserByName) {

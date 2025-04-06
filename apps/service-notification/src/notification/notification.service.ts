@@ -7,8 +7,8 @@ import { BullMqJob } from '../common/enums/bull-mq-job.enum';
 export class NotificationService {
     constructor(
         @Inject(NotificationQueueService)
-        private readonly notificationQueueService: NotificationQueueService
-    ) {} 
+        private readonly notificationQueueService: NotificationQueueService,
+    ) {}
 
     async schedulePush(user: IPushUserByName) {
         const now = Date.now();
