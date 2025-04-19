@@ -84,7 +84,8 @@ $ yarn start:dev [service name]
 
 ## env файли
 # service-core: 
----
+
+```
 POSTGRES_HOST=postgres
 POSTGRES_PORT=5432
 POSTGRES_USER=postgres
@@ -95,18 +96,19 @@ PORT=9001
 RABBIT_MQ_URI=amqp://guest:guest@rabbitmq:5672 
 RABBIT_MQ_NOTIFICATION_QUEUE=RABBIT_MQ_NOTIFICATION_QUEUE
 RABBIT_MQ_CORE_QUEUE=RABBIT_MQ_CORE_QUEUE
----
+```
+
 # service-integration:
----
+```
 RABBIT_MQ_URI=amqp://guest:guest@rabbitmq:5672
 RABBIT_MQ_INTEGRATION_QUEUE=RABBIT_MQ_INTEGRATION_QUEUE
 RABBIT_MQ_NOTIFICATION_QUEUE=RABBIT_MQ_NOTIFICATION_QUEUE
 WEBHOOK_BASE_URL=https://webhook.site
----
+```
 # service-notification:
----
+```
 RABBIT_MQ_URI=amqp://guest:guest@rabbitmq5672
 RABBIT_MQ_NOTIFICATION_QUEUE=RABBIT_MQ_NOTIFICATION_QUEUE
 REDIS_HOST=redis
 REDIS_PORT=6379
----
+```
