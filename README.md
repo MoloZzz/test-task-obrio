@@ -2,46 +2,46 @@
 
 > NestJS-based microservices system for user management and delayed push notifications
 
-## 📚 Опис
+## 📚 Description
 
-Цей проєкт реалізує систему з трьома незалежними мікросервісами для:
-- керування користувачами,
-- відправки push-сповіщень через 24 години після реєстрації,
-- взаємодії з зовнішніми інтеграціями (наприклад, webhook).
+This project implements a system consisting of three independent microservices for:
+- managing users,
+- sending push notifications 24 hours after registration,
+- interacting with external integrations (e.g., webhook).
 
-Кожен сервіс є окремим NestJS-додатком, ізольованим і масштабованим.
+Each service is a standalone, isolated, and scalable NestJS application.
 
 ---
 
-## 🔧 Мікросервіси
+## 🔧 Microservices
 
 ### 1. `service-core`
 
-- Обробляє HTTP-запит `POST /api/users` для створення користувача.
-- Зберігає ім’я користувача у PostgreSQL.
-- Після створення надсилає подію через RabbitMQ до інших сервісів.
+- Handles the HTTP request `POST /api/users` to create a new user.
+- Saves the user's name in PostgreSQL.
+- After creation, sends an event through RabbitMQ to the other services.
 
 ### 2. `service-notification`
 
-- Слухає події про нових користувачів.
-- Через 24 години (імітація через cron або Redis, наразі BullMQ поверх redis) надсилає push-сповіщення.
-- Публікує подію для `service-integration`.
+- Listens for new user events.
+- After 24 hours (simulated using cron or Redis — currently BullMQ on top of Redis), sends a push notification.
+- Publishes an event for `service-integration`.
 
 ### 3. `service-integration`
 
-- Слухає події про необхідність надсилання push.
-- Надсилає HTTP-запит на [webhook.site](https://webhook.site/) — для емуляції push-нотифікації.
+- Listens for events requiring push delivery.
+- Sends an HTTP request to [webhook.site](https://webhook.site/) — simulating the push notification.
 
 ---
 
-## ⚙️ Технології
+## ⚙️ Technologies
 
-- **NestJS** — серверна логіка сервісів
-- **RabbitMQ** — брокер повідомлень між сервісами
-- **PostgreSQL** — зберігання даних користувачів
-- **Redis** (опційно) — реалізація затримки/таймерів
-- **Docker / Docker Compose** — інфраструктура та запуск усіх сервісів
-- **Webhook.site** — тестування "надсилання push"
+- **NestJS** — backend logic of each service
+- **RabbitMQ** — message broker between services
+- **PostgreSQL** — user data storage
+- **Redis** (optional) — delay/timer implementation
+- **Docker / Docker Compose** — infrastructure and unified service startup
+- **Webhook.site** — used to test push notification delivery
 
 ---
 
