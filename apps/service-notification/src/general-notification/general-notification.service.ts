@@ -13,7 +13,7 @@ export class GeneralNotificationService {
     async schedulePush(user: IPushUserByName) {
         const now = Date.now();
         const pushTime = new Date(user.timeToPush).getTime();
-        const delayMs = Math.max(pushTime - now, 0); // захист від від’ємного значення
+        const delayMs = Math.max(pushTime - now, 0); // under 0 means push now
         await this.notificationQueueService.schedulePush(BullMqJob.NOTIFY_USER_BY_NAME, user.name, delayMs);
     }
 }

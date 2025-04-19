@@ -1,6 +1,6 @@
 import { Controller, Inject } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { NotificationService } from '../general-notification/notification.service';
+import { NotificationService } from '../general-notification/general-notification.service';
 import { IPushUserByName } from '@app/common';
 
 @Controller('push-user')

@@ -1,7 +1,7 @@
 import { RmqModule } from '@app/common';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { GeneralNotificationModule } from './general-notification/notification.module';
+import { GeneralNotificationModule } from './general-notification/general-notification.module';
 import { BullNotificationQueueModule } from './bull-notification-queue/bull-notification-queue.module';
 import { RMQEventsListenerModule } from './rmq-events-listener/rmq-events-listener.module';
 import { BullModule } from '@nestjs/bullmq';
