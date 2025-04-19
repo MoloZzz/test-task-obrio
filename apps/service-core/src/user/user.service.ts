@@ -1,6 +1,6 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
-import { UserEntity } from '../common/entity/user.entity';
-import { CreateUserDto } from '../common/dto/create-user.sto';
+import { UserEntity } from '../common/entities/user.entity';
+import { CreateUserDto } from '../common/dtos/create-user.sto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClientProxy } from '@nestjs/microservices';

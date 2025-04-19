@@ -5,6 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RmqModule } from '@app/common';
 import * as Joi from 'joi';
+import { PostgresqlModule } from './libs/postgresql/postgresql.module';
+import { entities } from './common/entities';
+import { migrations } from './common/migrations';
 
 @Module({
     imports: [
@@ -25,6 +28,7 @@ import * as Joi from 'joi';
                 RABBIT_MQ_CORE_QUEUE: Joi.string().required(),
             }),
         }),
+        PostgresqlModule.register(entities, migrations, []),
         TypeOrmModule.forRootAsync({
             imports: [ConfigModule],
             useFactory: async (configService: ConfigService) => ({
