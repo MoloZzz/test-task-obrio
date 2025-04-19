@@ -8,7 +8,7 @@ import { ApiOperation } from '@nestjs/swagger';
 export class UserController {
     constructor(private readonly serviceUser: UserService) {}
 
-    @Post('')
+    @Post()
     @ApiOperation({ summary: 'Create user, basic CRUD' })
     async createUser(@Body() data: CreateUserDto): Promise<UserEntity> {
         return this.serviceUser.createUser(data);

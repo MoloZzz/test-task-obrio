@@ -17,12 +17,6 @@ export class UserService {
     ) {}
 
     async createUser(data: CreateUserDto): Promise<UserEntity> {
-        const existing = await this.userRepository.findOne({
-            where: { name: data.name },
-        });
-        if (existing) {
-            throw new ConflictException(`User with name '${data.name}' already exists`);
-        }
         const userEntityObject: UserEntity = this.userRepository.create(data);
         const createdUser: UserEntity = await this.userRepository.save(userEntityObject);
 
