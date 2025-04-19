@@ -76,14 +76,15 @@ $ yarn start:dev [service name]
 
 ## `service-notification` Module Structure:
 
-- **notification** — Business logic for scheduling and execution
-- **notification-queue** — Integration of BullMQ + Redis, acting as an internal queue/alarm system
-- **events** — Listens to RMQ events from external services
+- **general-notification** — Business logic for scheduling and execution
+- **bull-notification-queue** — Integration of BullMQ + Redis, acting as an internal queue/alarm system
+- **rmq-events-listener** — Listens to RMQ events from external services
 - **rmq** — (uses shared module from `libs`) Registers RabbitMQ
 
 
 ## env файли
 # service-core: 
+---
 POSTGRES_HOST=postgres
 POSTGRES_PORT=5432
 POSTGRES_USER=postgres
@@ -94,15 +95,18 @@ PORT=9001
 RABBIT_MQ_URI=amqp://guest:guest@rabbitmq:5672 
 RABBIT_MQ_NOTIFICATION_QUEUE=RABBIT_MQ_NOTIFICATION_QUEUE
 RABBIT_MQ_CORE_QUEUE=RABBIT_MQ_CORE_QUEUE
-
+---
 # service-integration:
+---
 RABBIT_MQ_URI=amqp://guest:guest@rabbitmq:5672
 RABBIT_MQ_INTEGRATION_QUEUE=RABBIT_MQ_INTEGRATION_QUEUE
 RABBIT_MQ_NOTIFICATION_QUEUE=RABBIT_MQ_NOTIFICATION_QUEUE
 WEBHOOK_BASE_URL=https://webhook.site
-
+---
 # service-notification:
+---
 RABBIT_MQ_URI=amqp://guest:guest@rabbitmq5672
 RABBIT_MQ_NOTIFICATION_QUEUE=RABBIT_MQ_NOTIFICATION_QUEUE
 REDIS_HOST=redis
 REDIS_PORT=6379
+---
