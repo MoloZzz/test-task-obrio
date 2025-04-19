@@ -16,7 +16,12 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "typeorm:migration:create": "yarn run typeorm -- migration:create",
+    "typeorm:migration:generate": "yarn run typeorm -- migration:generate -d src/common/data-sources/ds.ts",
+    "typeorm:migration:up": "yarn run typeorm -- migration:run -d src/common/data-sources/ds.ts",
+    "typeorm:migration:down": "yarn run typeorm -- migration:revert -d src/common/data-sources/ds.ts"
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.0",

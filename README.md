@@ -81,6 +81,16 @@ $ yarn start:dev [service name]
 - **rmq-events-listener** — Listens to RMQ events from external services
 - **rmq** — (uses shared module from `libs`) Registers RabbitMQ
 
+## TypeORM instructions (for service-core)
+* Create a new entity in [directory](./src/common/entities)
+* Add a new entity to [import array](./src/common/entities/index.ts)
+* Generate a new migration for this entity
+
+```bash
+$ yarn run typeorm:migration:generate ./src/common/migrations/{name}
+# example
+$ yarn run typeorm:migration:generate ./src/common/migrations/create-users
+```
 
 ## env файли
 # service-core: 
