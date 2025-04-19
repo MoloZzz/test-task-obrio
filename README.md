@@ -66,18 +66,21 @@ $ docker compose up --build
 $ yarn start:dev [service name]
 ```
 
-## Як зараз усе працює разом:
-- service-core публікує подію RabbitMQ: { cmd: 'push-user-by-name' }.
-- user-created.listener.ts слухає цю подію через @MessagePattern(...).
-- listener викликає метод schedulePush(...) із NotificationService.
-- NotificationService додає задачу до BullMQ черги push-user, з затримкою 24 години.
-- Через 24 години NotificationProcessor слухає цю задачу й виконує (наприклад, надсилає запит до service-integration або пушить напряму).
+## How Everything Works Together:
 
-## service-notification модульна структура:
-- **notification**	Бізнес-логіка планування та виконання
-- **notification-queue**	Підключення BullMQ + Redis, тобто внутрішня черга/будильник
-- **events** Слухання подій RMQ із зовнішніх сервісів
-- **rmq** (використовуємо спільний модуль з libs) Реєстрація RabbitMQ
+- `service-core` publishes a RabbitMQ event: `{ cmd: 'push-user-by-name' }`.
+- `user-created.listener.ts` listens to this event using `@MessagePattern(...)`.
+- The listener calls the `schedulePush(...)` method from `NotificationService`.
+- `NotificationService` adds a task to the BullMQ queue `push-user`, with a 24-hour delay.
+- After 24 hours, `NotificationProcessor` picks up the task and executes it (e.g., sends a request to `service-integration` or pushes directly).
+
+## `service-notification` Module Structure:
+
+- **notification** — Business logic for scheduling and execution
+- **notification-queue** — Integration of BullMQ + Redis, acting as an internal queue/alarm system
+- **events** — Listens to RMQ events from external services
+- **rmq** — (uses shared module from `libs`) Registers RabbitMQ
+
 
 ## env файли
 # service-core: 
