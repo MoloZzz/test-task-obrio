@@ -24,5 +24,4 @@ COPY --chown=node:obrio-group package.json yarn.lock ./
 # Install dependencies
 RUN yarn --frozen-lockfile
 
-# Запускаємо додаток у режимі розробки
 CMD ["yarn", "run", "start:dev", "service-integration"]

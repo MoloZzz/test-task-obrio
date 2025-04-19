@@ -4,7 +4,6 @@ import { CreateUserDto } from '../common/dto/create-user.sto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClientProxy } from '@nestjs/microservices';
-import { lastValueFrom } from 'rxjs';
 import { addDays } from 'date-fns';
 import { IPushUserByName } from '@app/common';
 
@@ -22,7 +21,7 @@ export class UserService {
             where: { name: data.name },
         });
         if (existing) {
-            throw new ConflictException(`Користувач з ім'ям '${data.name}' вже існує`);
+            throw new ConflictException(`User with name '${data.name}' already exists`);
         }
         const userEntityObject: UserEntity = this.userRepository.create(data);
         const createdUser: UserEntity = await this.userRepository.save(userEntityObject);

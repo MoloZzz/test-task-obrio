@@ -9,6 +9,6 @@ async function bootstrap() {
     const configService = app.get<ConfigService>(ConfigService);
     const rmq = app.get<RmqService>(RmqService);
     app.connectMicroservice<MicroserviceOptions>(rmq.getOptions(configService.get<string>('RABBIT_MQ_INTEGRATION_QUEUE')));
-    await app.startAllMicroservices(); //Не має власного порту, звертаємось лише через чергу rmq
+    await app.startAllMicroservices(); //There is no own port, it is a microservice
 }
 bootstrap();

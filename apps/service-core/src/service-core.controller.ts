@@ -6,7 +6,7 @@ export class ServiceCoreController {
     constructor() {}
 
     @Get()
-    @ApiOperation({ summary: 'Перевірка роботи сервісу' })
+    @ApiOperation({ summary: 'Is service working?' })
     async getHello(): Promise<string> {
         return 'Hello from service-core';
     }

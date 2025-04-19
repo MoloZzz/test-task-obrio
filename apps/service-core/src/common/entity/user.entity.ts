@@ -11,20 +11,14 @@ export class UserEntity {
     @CreateDateColumn({
         type: 'timestamptz',
         default: () => 'CURRENT_TIMESTAMP',
-        comment: 'Дата створення',
+        comment: 'Creation date',
     })
     createdAt: Date;
 
     @UpdateDateColumn({
         type: 'timestamptz',
-        comment: 'Дата останнього оновлення',
+        comment: 'Last update date',
+        default: () => 'CURRENT_TIMESTAMP',
     })
     updatedAt: Date;
-
-    @Column({
-        type: 'boolean',
-        default: false,
-        comment: 'Чи був надісланий push користувачу',
-    })
-    isPushed: boolean;
 }

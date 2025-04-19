@@ -1,11 +1,11 @@
 import { Controller, Inject } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { NotificationService } from '../general-notification/general-notification.service';
+import { GeneralNotificationService } from '../general-notification/general-notification.service';
 import { IPushUserByName } from '@app/common';
 
 @Controller('push-user')
 export class PushUserEventsController {
-    constructor(@Inject(NotificationService) private readonly notificationService: NotificationService) {}
+    constructor(@Inject(GeneralNotificationService) private readonly notificationService: GeneralNotificationService) {}
 
     @MessagePattern({ cmd: 'push-user-by-name' })
     async handleUserCreated(data: IPushUserByName) {

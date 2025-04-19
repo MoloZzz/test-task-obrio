@@ -6,7 +6,7 @@ import { Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
 
-/** BullMQ reader */
+/** BullMQ listener */
 @Processor(BullMqQueue.BULL_MQ_NOTIFY_USER_QUEUE)
 export class BullNotificationQueueProcessor {
     constructor(@Inject('INTEGRATION_CLIENT') private readonly clientIntegration: ClientProxy) {}

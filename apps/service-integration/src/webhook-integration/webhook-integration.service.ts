@@ -16,9 +16,9 @@ export class WebhookIntegrationService {
     }
 
     /**
-     * Генерує унікальний URL для вебхука через webhook.site
-     * @param name - Ім'я для ідентифікації
-     * @returns Унікальний URL
+     * Generate unique URL for webhook by webhook.site
+     * @param name - identifier for webhook
+     * @returns Unique URL
      */
     async generateUrl(name: string): Promise<string> {
         const response: AxiosResponse = await this.httpService.axiosRef.post(this.urlToken, { alias: name });
