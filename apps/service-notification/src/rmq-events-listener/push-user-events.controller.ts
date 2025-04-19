@@ -1,11 +1,10 @@
 import { Controller, Inject } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { NotificationService } from '../notification/notification.service';
+import { NotificationService } from '../general-notification/notification.service';
 import { IPushUserByName } from '@app/common';
 
-/** Слухаємо події з RMQ (інші сервіси) */
 @Controller('push-user')
-export class PushUserController {
+export class PushUserEventsController {
     constructor(@Inject(NotificationService) private readonly notificationService: NotificationService) {}
 
     @MessagePattern({ cmd: 'push-user-by-name' })

@@ -9,7 +9,7 @@ import * as Joi from 'joi';
         ConfigModule.forRoot({
             isGlobal: true,
             envFilePath: [`apps/service-integration/.env`],
-            validationSchema: Joi.object({        
+            validationSchema: Joi.object({
                 RABBIT_MQ_URI: Joi.string().required(),
                 RABBIT_MQ_NOTIFICATION_QUEUE: Joi.string().required(),
                 RABBIT_MQ_INTEGRATION_QUEUE: Joi.string().required(),

@@ -1,13 +1,13 @@
 import { IPushUserByName } from '@app/common';
 import { Inject, Injectable } from '@nestjs/common';
-import { NotificationQueueService } from '../notification-queue/notification-queue.service';
+import { BullNotificationQueueService } from '../bull-notification-queue/bull-notification-queue.service';
 import { BullMqJob } from '../common/enums/bull-mq-job.enum';
 
 @Injectable()
-export class NotificationService {
+export class GeneralNotificationService {
     constructor(
-        @Inject(NotificationQueueService)
-        private readonly notificationQueueService: NotificationQueueService,
+        @Inject(BullNotificationQueueService)
+        private readonly notificationQueueService: BullNotificationQueueService,
     ) {}
 
     async schedulePush(user: IPushUserByName) {

@@ -1,13 +1,11 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bull';
 import { BullMqQueue } from '../common/enums/bull-mq-queue.enum';
 import { Queue } from 'bull';
-import { lastValueFrom } from 'rxjs';
-import { ClientProxy } from '@nestjs/microservices';
 
-/** Тут додаємо в чергу BullMQ */
+/** BullMQ (only for add into queue)*/
 @Injectable()
-export class NotificationQueueService {
+export class BullNotificationQueueService {
     constructor(@InjectQueue(BullMqQueue.BULL_MQ_NOTIFY_USER_QUEUE) private readonly queue: Queue) {}
 
     async schedulePush(jobName: string, userName: string, delayMs: number = 0) {
